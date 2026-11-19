@@ -1,0 +1,23 @@
+import express from "express";
+import mongoose from "mongoose";
+import { connectDB } from "./db.js";
+import equipos from "./routes/equipos.js";
+import usuarios from "./routes/usuarios.js";
+import prestamos from "./routes/prestamos.js";
+import reportes from "./routes/reportes.js";
+import { notFound, errorHandler } from "./middlewares/errorHandler.js";
+const app=express();
+app.use(express.json());
+app.use(express.static("public"));
+app.get("/api/health",(req,res)=>{
+  const connected=mongoose.connection.readyState===1;
+  res.status(connected?200:503).json({status:connected?"ok":"error",db:connected?"connected":"disconnected"});
+});
+app.use("/api/equipos",equipos);
+app.use("/api/usuarios",usuarios);
+app.use("/api/prestamos",prestamos);
+app.use("/api/reportes",reportes);
+app.use(notFound);
+app.use(errorHandler);
+const port=process.env.PORT||3000;
+connectDB().then(()=>app.listen(port,"0.0.0.0",()=>console.log(`Trionix Gear en puerto ${port}`))).catch(err=>{console.error(err);process.exit(1);});

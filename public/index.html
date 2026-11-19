@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="es">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Trionix Gear | Inventario</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<header><div class="brand">TRIONIX <span>GEAR</span></div><p>Gestión inteligente de equipos y préstamos · Trionix Labs</p></header>
+<nav><button data-view="dashboard" class="active">Resumen</button><button data-view="equipos">Inventario</button><button data-view="usuarios">Usuarios</button><button data-view="prestamos">Préstamos</button></nav>
+<main>
+<section id="dashboard" class="view">
+  <h1>Panel de control</h1><div id="stats" class="stats"></div>
+  <article><h2>Equipos más prestados</h2><div id="top"></div></article>
+</section>
+<section id="equipos" class="view hidden"><h1>Inventario de equipos</h1>
+<form id="equipoForm" class="form-grid"><input name="codigo" placeholder="Código EQ-0009" pattern="EQ-[0-9]{4}" required><input name="nombre" placeholder="Nombre del equipo" required minlength="3"><select name="categoria" required><option value="">Categoría</option><option>portatil</option><option>proyector</option><option>camara</option><option>audio</option><option>redes</option></select><input name="ubicacion" placeholder="Ubicación"><button>Agregar equipo</button></form><div id="equiposTable"></div></section>
+<section id="usuarios" class="view hidden"><h1>Usuarios</h1>
+<form id="usuarioForm" class="form-grid"><input name="nombre" placeholder="Nombre completo" required><input name="documento" placeholder="Documento" pattern="[0-9]{6,12}" required><input name="email" type="email" placeholder="Correo electrónico" required><select name="tipo" required><option value="">Tipo</option><option>estudiante</option><option>docente</option><option>administrativo</option></select><button>Crear usuario</button></form><div id="usuariosTable"></div></section>
+<section id="prestamos" class="view hidden"><h1>Préstamos</h1>
+<form id="prestamoForm" class="form-grid"><select name="equipoId" id="equipoSelect" required></select><select name="usuarioId" id="usuarioSelect" required></select><label>Fecha límite<input name="fechaLimite" type="date" required></label><input name="observaciones" placeholder="Observaciones"><button>Registrar préstamo</button></form><div id="prestamosTable"></div></section>
+<div id="toast" role="status"></div>
+</main><footer>TRIONIX GEAR · Trionix Labs</footer><script src="app.js"></script></body></html>
